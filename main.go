@@ -15,6 +15,9 @@ import (
 
 const maxFailures = 10
 
+// version is set at release build time via -ldflags.
+var version = "dev"
+
 func main() {
 	os.Exit(run())
 }
@@ -25,11 +28,16 @@ func run() int {
 	bots := flag.String("bots", "copilot", "bot comments to report: none|copilot|all")
 	fromStart := flag.Bool("from-start", false, "report existing comments and checks instead of baselining them")
 	once := flag.Bool("once", false, "poll once and exit")
+	showVersion := flag.Bool("version", false, "print version and exit")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, "usage: gh-watch [flags] [PR number | PR URL | branch]  (default: PR of current branch)")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
+	if *showVersion {
+		fmt.Println("gh-watch", version)
+		return 0
+	}
 	if *bots != "none" && *bots != "copilot" && *bots != "all" {
 		fmt.Fprintln(os.Stderr, "gh-watch: --bots must be none, copilot or all")
 		return 2

@@ -6,6 +6,14 @@ Uses the `gh` CLI for auth and API access. No tokens, no public endpoint, no web
 
 ## Install
 
+Homebrew:
+
+```
+brew install exu/tap/gh-watch
+```
+
+From source:
+
 ```
 make install          # tests, then builds to ~/.local/bin/gh-watch
 make install-skill    # copies skill/SKILL.md to ~/.claude/skills/gh-watch
