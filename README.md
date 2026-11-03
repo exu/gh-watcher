@@ -54,3 +54,7 @@ The skill in `skill/SKILL.md` tells a session how to start the watcher with the 
 ## Rate limits
 
 Each poll is about 6 REST calls. At 60s that is roughly 360 calls/hour per watched PR, against a 5000/hour budget.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
