@@ -1,16 +1,18 @@
 BIN ?= $(HOME)/.local/bin
+VERSION ?= dev
+LDFLAGS = -s -w -X main.version=$(VERSION)
 SKILL_DIR ?= $(HOME)/.claude/skills/gh-watch
 
 .PHONY: build test install install-skill clean
 
 build:
-	go build -o bin/gh-watch .
+	go build -trimpath -ldflags "$(LDFLAGS)" -o bin/gh-watch .
 
 test:
 	go vet ./... && go test ./...
 
 install: test
-	go build -o $(BIN)/gh-watch .
+	go build -trimpath -ldflags "$(LDFLAGS)" -o $(BIN)/gh-watch .
 
 install-skill:
 	mkdir -p $(SKILL_DIR)

@@ -6,12 +6,20 @@ Uses the `gh` CLI for auth and API access. No tokens, no public endpoint, no web
 
 ## Install
 
+To install on Homebrew (macOS and Linux), tap and install in one step:
+
+```
+brew install exu/tap/gh-watch
+```
+
+To build from source instead:
+
 ```
 make install          # tests, then builds to ~/.local/bin/gh-watch
 make install-skill    # copies skill/SKILL.md to ~/.claude/skills/gh-watch
 ```
 
-Needs Go and an authenticated `gh` (`gh auth status`).
+Either way you need an authenticated `gh` (`gh auth status`); building from source also needs Go.
 
 ## Use
 
@@ -46,3 +54,7 @@ The skill in `skill/SKILL.md` tells a session how to start the watcher with the 
 ## Rate limits
 
 Each poll is about 6 REST calls. At 60s that is roughly 360 calls/hour per watched PR, against a 5000/hour budget.
+
+## License
+
+MIT, see [LICENSE](LICENSE).

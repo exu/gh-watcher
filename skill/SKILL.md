@@ -13,11 +13,13 @@ One session = one PR = one watcher. The PR is resolved from the current branch, 
 
 1. Confirm a PR exists for this branch: `gh pr view --json number,url,state`. No PR yet means open it first (draft is fine).
 2. Check no watcher is running for it already: `pgrep -fl 'gh-watch'`. A second one for the same PR exits with `already watching` (lock), so a duplicate is harmless but useless.
-3. Start it with the Monitor tool (persistent), command:
+3. Start it with the Monitor tool, `timeout_ms: 1800000` (30 min, the maximum), command:
 
 ```
-gh-watch
+cd <pr-worktree> && gh-watch
 ```
+
+Monitors are NOT persistent: the default is 5 min and the cap is 30 min. You get one expiry notice; re-arm with the same command from the same worktree. Re-arming loses nothing, because state is saved after every poll and a restart reports whatever arrived during the gap. If the re-armed run exits with `already watching (pid N)`, the old process outlived the expiry: `kill N`, then re-arm. Keep re-arming until the PR is merged or closed, including across long waits for the user.
 
 Useful variants:
 - `gh-watch 1234` or `gh-watch https://github.com/org/repo/pull/1234` - explicit PR, any cwd (add `--repo org/repo` for a bare number outside a checkout).
