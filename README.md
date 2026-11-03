@@ -6,20 +6,20 @@ Uses the `gh` CLI for auth and API access. No tokens, no public endpoint, no web
 
 ## Install
 
-Homebrew:
+To install on Homebrew (macOS and Linux), tap and install in one step:
 
 ```
 brew install exu/tap/gh-watch
 ```
 
-From source:
+To build from source instead:
 
 ```
 make install          # tests, then builds to ~/.local/bin/gh-watch
 make install-skill    # copies skill/SKILL.md to ~/.claude/skills/gh-watch
 ```
 
-Needs Go and an authenticated `gh` (`gh auth status`).
+Either way you need an authenticated `gh` (`gh auth status`); building from source also needs Go.
 
 ## Use
 
